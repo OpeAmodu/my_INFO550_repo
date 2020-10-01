@@ -109,10 +109,4 @@ labs(title = "Relationship between BMI and Health Expenses")
 * Above a BMI of 30, there is a distinctive increase in Health expenses
 * The relationship between age and expenses may be polynomial
 
-<!--
-Name of Student           |Score
-.................................
-Manasvi Sundar            |  1
-Yue Xie                   |  1
--->
  
