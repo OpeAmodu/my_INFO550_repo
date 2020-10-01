@@ -1,0 +1,118 @@
+
+---
+title: "Healthcare Expenses Modelling"
+author: "Opeyemi Amodu"
+output: html_document
+---
+
+## Description of Data set and Project Objectives
+This data was retrieved from [kaggle](https://www.kaggle.com/raghupalem/insurance-charges). 
+It contains a crossection of health care related variables for a sample for 1,338 individuals.  
+The variable contained in the data are the age, sex, BMI, number of children, smoking status of the patient, Region of the United States that the person is from and medical expenses. 
+In my model, expenses would be the outcome. I will develop a Machine Learning Model that predict a person's probable health care expenses using other variables in the dataset. Seventy-five 
+percent of the data would be used for training the model, while the rest would be used as test data set. The training and test sets would be randomly assigned. Finally, the model
+would be tested for robustness and generilizability. 
+
+```{r}
+health_expense <- read.csv("health_insurance.csv", stringsAsFactors = TRUE)
+str(health_expense)
+getwd()
+```
+
+```{r, echo = FALSE, results = FALSE, message = FALSE, warning = FALSE}
+#necessary libraries
+library(dplyr)
+library(psych)
+library(gridExtra)
+library(knitr)
+library(ggplot2)
+```
+
+# Exploratory Data Analysis
+Since the dataset contains 7 unique variables, it is important to explore the relationship between them. Testing for covariation, trends in the data, pattern of 
+distribution and the relationship of the variables to cost would help develop a better model. In medical literature, it is accepted that age for example has a direct
+relationship with BMI. Such an interaction may be helpful for building our prediction model. 
+
+```{r}
+summary(health_expense)
+
+```
+
+
+### Distribution of Expenses
+
+```{r}
+expense_distribution <- ggplot(health_expense)+
+  geom_histogram(aes(x = expenses), bins = 30, fill = "green", color = "green")+
+  geom_vline(aes(xintercept =median(expenses)), color = "blue")+
+  labs(title = "Distribution of Health Care Expenses Nationally", x = "Expenses in U.S dollars",
+       y ="Frequency")+
+  geom_text(aes(x = median (expenses), y = 150, label = "median"), 
+            color = "blue", 
+            size = 4, 
+            alpha = 0.7, 
+            angle = 45)+
+  scale_x_continuous(n.breaks = 13)
+  expense_distribution 
+```
+
+The distribution of health expenses is skewed to the right. This is expected as few people would require expensive health interventions in a given year. The median 
+for this sample is about $10000 for the year and the maximum expense is about $65000 per year. Since expense is the variable we are predicting, the model could 
+start by taking a log of expense and converting back to actual expense after prediction. However, we would try out different models to know which works best. 
+
+
+### Health Expenses by Region
+
+```{r, warning = FALSE, results = "asis", message = FALSE}
+median_regional_expense <- health_expense %>%
+  group_by(region)%>%
+  summarize(
+            `median(in US dollars)` = median(expenses) 
+            )
+kable(median_regional_expense, caption = "Median Health Expense by Region")
+```
+
+```{r}
+distribution_by_region <- ggplot(health_expense)+
+  geom_histogram(aes(x = expenses, color = region, fill = region), bins = 30)+
+  labs(title = "Distribution of Health Care Expenses by Region", x = "Health Expenses in U.S dollars", y = "Frequency")+
+  facet_wrap(vars(region))
+distribution_by_region
+```
+
+Healthcare is more expensive in the Northeast region that in other regions of the country. In other regions, health care expenses does not vary by much.The pattern of distribution across the regions are relatively 
+the same. 
+
+### Correlation Matrix
+
+```{r}
+cor(health_expense[c("age","bmi", "children", "expenses")])
+pairs.panels(health_expense[c("age","bmi","children","expenses")])
+```
+
+As suspected, there is a relationship between age and BMI. We can represent this as an interaction in our model. Also, BMI and Age is correlated with increase in Health expenses. The scatter plot for BMI~Expenses
+reveal a peculiar pattern. Health expense seem to markedly increase from about a BMI of 30+ (This is better visualized in the chart below). Also, age seem to have a polynomial relationship with Health expenses with an 
+exponential increase in Expenses as age goes up. These findings would be represented in our prediction model. 
+
+```{r}
+ggplot(health_expense) + 
+geom_point(aes(x = bmi, y = expenses), color = "blue") + 
+geom_vline(xintercept = 30)+
+labs(title = "Relationship between BMI and Health Expenses")
+```
+
+### Summary of Key findings
+* The distribution of healthcare expenses in skewed to the right, using a log of expenses and converting back to "real" expenses may be beneficial
+* The majority of people in our data set do not smoke
+* The median expenses by region do not vary much, except for the Northeast. Also, there is a similar distribution of expenses across all regions
+* Age seem to be correlated with BMI and we may may need to represent this interaction in our model
+* Above a BMI of 30, there is a distinctive increase in Health expenses
+* The relationship between age and expenses may be polynomial
+
+<!--
+Name of Student           |Score
+.................................
+Manasvi Sundar            |  1
+Yue Xie                   |  1
+-->
+ 
