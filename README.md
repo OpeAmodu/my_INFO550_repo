@@ -1,4 +1,4 @@
-## Content of Directory
+## Contents of Repo
 This repo contains analysis of the [kaggle](https://www.kaggle.com/raghupalem/insurance-charges) dataset. This data set is saved as health_insurance.csv in the repo.  The data collects health care expenses of a sample of 1,338 individuals for a given year. Other characteristics recorded for each individual include age, sex, BMI, number of children, smoking status of the patient and Region of the United States that the person is from. 
 
 The Makefile in this repo contains rules of how files would depend on each other to execute. 
