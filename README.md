@@ -5,30 +5,17 @@ The Makefile in this repo contains rules of how files would depend on each other
 
 The Costmodelling.Rmd file is a script that produces a report in HTML format containing details of analysis, codes and figures.
 
-## Installing Needed Packages
-The code below would install the needed packages for code to run. Please note that a recent version of R would be needed to make code run without issues
 
-```
-installed_pkgs <- row.names(installed.packages())
-pkgs <- c("dplyr", "psych", "gridExtra", "ggplot2", "knitr")
-for(p in pkgs){
-	if(!(p %in% installed_pkgs)){
-		install.packages(p)
-	}
-}
-
-```
 
 ## Executing Code
-To produce the html report, please run the following bash script
+To produce the html report, run the following bash command to build a docker image on your machine. Please note that you will need wsl2 and docker to build image.
 
 ```
-Rscript -e "rmarkdown::render('costmodelling.Rmd')"
+make docker_build
 ```
 
-To install needed packages you can also run the following bash script
+Once the image has been build, please mount the current directory where all the files are saved to the project directory in the container by using the following bash sytax. Replace "/current_local_directory" with your local directory on your computer where all files from this repo was saved. This will produce an html document in your current directory
 
 ```
-chmod +x package_install.R && \
-Rscript package_install.R
+docker run -v /current_local_directory:/final_project -it final_proj
 ```

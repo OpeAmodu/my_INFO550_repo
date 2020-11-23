@@ -9,9 +9,8 @@ output: html_document
 This data was retrieved from [kaggle](https://www.kaggle.com/raghupalem/insurance-charges). 
 It contains a crossection of health care related variables for a sample for 1,338 individuals.  
 The variable contained in the data are the age, sex, BMI, number of children, smoking status of the patient, Region of the United States that the person is from and medical expenses. 
-In my model, expenses would be the outcome. I will develop a Machine Learning Model that predict a person's probable health care expenses using other variables in the dataset. Seventy-five 
-percent of the data would be used for training the model, while the rest would be used as test data set. The training and test sets would be randomly assigned. Finally, the model
-would be tested for robustness and generilizability. 
+In my model, expenses would be the outcome. I will produce a report of exploratory data analysis that would help identify predictors of a person's probable medical expenses. These predictors can be used to
+develop a Machine Learning Model that predict a person's probable health care expenses using other variables in the dataset.
 
 ```{r}
 health_expense <- read.csv("health_insurance.csv", stringsAsFactors = TRUE)
