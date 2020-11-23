@@ -5,6 +5,7 @@ The Makefile in this repo contains rules of how files would depend on each other
 
 The Costmodelling.Rmd file is a script that produces a report in HTML format containing details of analysis, codes and figures.
 
+The Dockerfile contains instructions that helps to build a docker image
 
 
 ## Executing Code
