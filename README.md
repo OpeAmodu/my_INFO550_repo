@@ -7,6 +7,10 @@ The Costmodelling.Rmd file is a script that produces a report in HTML format con
 
 The Dockerfile contains instructions that helps to build a docker image
 
+The package_install.R scripts helps to install packages needed for the code to run in R. 
+
+Once the image is built, the packages will install automatically into the docker container
+
 
 ## Executing Code
 To produce the html report, run the following bash command to build a docker image on your machine. Please note that you will need wsl2 and docker to build image.
