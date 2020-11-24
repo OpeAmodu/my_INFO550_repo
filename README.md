@@ -12,15 +12,26 @@ The package_install.R scripts helps to install packages needed for the code to r
 Once the image is built, the packages will install automatically into the docker container
 
 
-## Executing Code
-To produce the html report, run the following bash command to build a docker image on your machine. Please note that you will need wsl2 and docker to build image.
+## Building Docker Image Locally
+Once the contents of this repo has been downloaded to local computer, please set your directory to where the files were downloaded. Run the following bash commmand on your linux
+system to build image. Please note that you could also directly download Image from my dockerhub account. Instructions to download image is found under the session "Pulling Docker Image from dockerhub"
 
 ```
 make docker_build
 ```
 
-Once the image has been build, please mount the current directory where all the files are saved to the project directory in the container by using the following bash sytax. Replace "/current_local_directory" with your local directory on your computer where all files from this repo was saved. This syntax points your local directory to the project directory in the docker container. Following this step should produce an html document in your local directory.
+### Running Container
+Once the image has been built, please mount the current directory where all the files are saved to the project directory in the container by using the following bash sytax. Replace "/current_local_directory" with your local directory on your computer where all files from this repo was saved. This syntax mounts your local directory to the project directory in the docker container. Following this step should produce an html document in your local directory.
 
 ```
 docker run -v /current_local_directory:/final_project -it final_proj
 ```
+
+### Pulling Docker Image from dockerhub
+To avoid building the image from locally from scratch, please pull the container from my docker hub account using the following syntax
+
+```
+docker pull opeamodu/final_project:final_proj
+```
+
+Once the container has been pulled, please follow the instructions under the "Running Container" session to produce the HTML report in your local drive. 
