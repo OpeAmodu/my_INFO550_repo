@@ -19,7 +19,7 @@ To produce the html report, run the following bash command to build a docker ima
 make docker_build
 ```
 
-Once the image has been build, please mount the current directory where all the files are saved to the project directory in the container by using the following bash sytax. Replace "/current_local_directory" with your local directory on your computer where all files from this repo was saved. This will produce an html document in your current directory
+Once the image has been build, please mount the current directory where all the files are saved to the project directory in the container by using the following bash sytax. Replace "/current_local_directory" with your local directory on your computer where all files from this repo was saved. This syntax points your local directory to the project directory in the docker container. Following this step should produce an html document in your local directory.
 
 ```
 docker run -v /current_local_directory:/final_project -it final_proj
