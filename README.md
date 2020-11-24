@@ -12,7 +12,7 @@ The package_install.R scripts helps to install packages needed for the code to r
 Once the image is built, the packages will install automatically into the docker container
 
 
-## Building Docker Image Locally
+## Building Docker Image and Producing Report Locally
 Once the contents of this repo has been downloaded to local computer, please set your directory to where the files were downloaded. Run the following bash commmand on your linux
 system to build image. Please note that you could also directly download Image from my dockerhub account. Instructions to download image is found under the session "Pulling Docker Image from dockerhub"
 
